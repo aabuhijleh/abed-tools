@@ -1,0 +1,89 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "abed-tools",
+  "title": "Abed Tools",
+  "description": "Personal Raycast tools for my daily workflow",
+  "icon": "extension-icon.png",
+  "author": "aabuhijleh",
+  "platforms": [
+    "macOS"
+  ],
+  "categories": [
+    "Productivity",
+    "Developer Tools"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "improve-writing",
+      "title": "Improve Writing",
+      "subtitle": "Abed Tools",
+      "description": "Rewrite selected text with Claude, preview the result, then paste or copy it",
+      "mode": "view",
+      "keywords": [
+        "writing",
+        "grammar",
+        "rewrite",
+        "edit",
+        "proofread",
+        "unslop"
+      ]
+    }
+  ],
+  "preferences": [
+    {
+      "name": "apiKey",
+      "title": "Anthropic API Key",
+      "description": "Your key from console.anthropic.com. Used to call Claude directly, no Raycast Pro needed.",
+      "type": "password",
+      "required": true
+    },
+    {
+      "name": "model",
+      "title": "Model",
+      "description": "Claude model used to rewrite the text.",
+      "type": "dropdown",
+      "required": false,
+      "default": "claude-haiku-4-5",
+      "data": [
+        {
+          "title": "Haiku 4.5",
+          "value": "claude-haiku-4-5"
+        },
+        {
+          "title": "Sonnet 5",
+          "value": "claude-sonnet-5"
+        },
+        {
+          "title": "Opus 5",
+          "value": "claude-opus-5"
+        }
+      ]
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.104.20",
+    "@raycast/utils": "^2.2.7",
+    "@tanstack/ai": "^0.51.0",
+    "@tanstack/ai-anthropic": "^0.18.2",
+    "@tanstack/ai-react": "^0.22.3",
+    "marked": "^18.0.11"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.2.0",
+    "@types/node": "22.19.17",
+    "@types/react": "19.0.10",
+    "eslint": "^10.5.0",
+    "prettier": "^3.8.5",
+    "typescript": "^6.0.3"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "prepublishOnly": "echo \"\\n\\nIt seems like you are trying to publish the Raycast extension to npm.\\n\\nIf you did intend to publish it to npm, remove the \\`prepublishOnly\\` script and rerun \\`npm publish\\` again.\\nIf you wanted to publish it to the Raycast Store instead, use \\`npm run publish\\` instead.\\n\\n\" && exit 1",
+    "publish": "npx @raycast/api@latest publish",
+    "typecheck": "tsc --noEmit"
+  }
+}

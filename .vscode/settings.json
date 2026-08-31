@@ -1,0 +1,7 @@
+{
+  "search.exclude": {
+    "CLAUDE.md": true,
+    ".agents/skills": true,
+    ".claude/skills": true
+  }
+}
