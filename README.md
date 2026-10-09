@@ -26,7 +26,7 @@ So paste and copy carry two clipboard flavors. Slack, Notion, Gmail and Docs tak
 
 ## ⚙️ Setup
 
-Add your Anthropic API key from [console.anthropic.com](https://console.anthropic.com) in the extension preferences. Raycast prompts for it on first run. The model defaults to Haiku 4.5 and can be changed to Sonnet 5 or Opus 5 in the same place.
+Add your Anthropic API key from [console.anthropic.com](https://console.anthropic.com) in the extension preferences. Raycast prompts for it on first run. The model defaults to Haiku 5.5 and can be changed to Sonnet 5.5 or Opus 5.5 in the same place.
 
 <img src="media/preferences.png" alt="Extension preferences, showing the API key and model fields" width="603" />
 

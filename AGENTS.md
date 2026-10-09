@@ -58,6 +58,8 @@ To test a payload without the extension, write the pasteboard from the shell and
 
 ## Anthropic SDK
 
-Models after Opus 4.6 reject any `temperature` other than 1.0 with a 400. The model preference offers Sonnet 5 and Opus 5, so leave `modelOptions.temperature` unset.
+Models after Opus 4.6 reject any `temperature` other than 1.0 with a 400. Every model the preference offers is from the 5.5 family, so leave `modelOptions.temperature` unset.
+
+`@tanstack/ai-anthropic` types `createAnthropicChat` against its own model list, which lags the API and lacks `claude-haiku-5-5`. `src/lib/ai.ts` casts the ID to `AnthropicChatModel`. At runtime the adapter passes any ID through and falls back to a 64,000 `max_tokens` default for IDs it does not know.
 
 The SDK reports transport failures as a bare `Connection error.` and puts the real reason in `error.cause`. `describeError` in `src/lib/errors.ts` walks that chain.

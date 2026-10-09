@@ -1,11 +1,11 @@
 import { chat } from "@tanstack/ai";
-import { createAnthropicChat } from "@tanstack/ai-anthropic";
+import { createAnthropicChat, type AnthropicChatModel } from "@tanstack/ai-anthropic";
 import { stream } from "@tanstack/ai-react";
 import { getPreferences } from "./preferences";
 
 export function createEditorConnection(systemPrompt: string) {
   const { apiKey, model } = getPreferences();
-  const adapter = createAnthropicChat(model, apiKey);
+  const adapter = createAnthropicChat(model as AnthropicChatModel, apiKey);
 
   return stream((messages, _data, abortSignal) => {
     const abortController = new AbortController();
