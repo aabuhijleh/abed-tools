@@ -3,7 +3,7 @@ import { diffWordsWithSpace } from "diff";
 type Hunk = { kind: "equal"; text: string } | { kind: "change"; removed: string; added: string };
 
 // Zero-width spaces inside the markers keep them flanking next to punctuation.
-const ZERO_WIDTH_SPACE = "​";
+const ZERO_WIDTH_SPACE = "\u200B";
 
 export function toDiffMarkdown(before: string, after: string): string {
   const markdown = groupHunks(before, after)
@@ -14,7 +14,7 @@ export function toDiffMarkdown(before: string, after: string): string {
 
   return markdown
     .split("\n")
-    .map((line) => line.replace(/^ +/, (spaces) => " ".repeat(spaces.length)))
+    .map((line) => line.replace(/^ +/, (spaces) => "\u00A0".repeat(spaces.length)))
     .join("  \n");
 }
 
