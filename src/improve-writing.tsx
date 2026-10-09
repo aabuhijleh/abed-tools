@@ -20,6 +20,7 @@ import { readSelection } from "./lib/source-text";
 import { toRichText } from "./lib/rich-text";
 import { copyRichText, sendPasteKeystroke } from "./lib/pasteboard";
 import { SYSTEM_PROMPT, wrapSourceText } from "./commands/improve-writing/prompt";
+import { toDiffMarkdown } from "./commands/improve-writing/diff";
 
 const COPY_SHORTCUT: Keyboard.Shortcut = { modifiers: ["cmd", "shift"], key: "c" };
 const PASTE_PLAIN_SHORTCUT: Keyboard.Shortcut = { modifiers: ["cmd", "shift"], key: "enter" };
@@ -27,11 +28,14 @@ const COPY_PLAIN_SHORTCUT: Keyboard.Shortcut = { modifiers: ["cmd", "opt"], key:
 const REFINE_SHORTCUT: Keyboard.Shortcut = { modifiers: ["cmd"], key: "i" };
 const REGENERATE_SHORTCUT: Keyboard.Shortcut = { modifiers: ["cmd"], key: "r" };
 const STOP_SHORTCUT: Keyboard.Shortcut = { modifiers: ["cmd"], key: "." };
+const DIFF_SHORTCUT: Keyboard.Shortcut = { modifiers: ["cmd"], key: "d" };
 
 export default function ImproveWriting() {
   const { model } = getPreferences();
   const connection = useMemo(() => createEditorConnection(SYSTEM_PROMPT), []);
   const { messages, sendMessage, reload, stop, isLoading, error } = useChat({ connection });
+  const [source, setSource] = useState("");
+  const [showDiff, setShowDiff] = useState(false);
   const [sourceError, setSourceError] = useState<Error>();
   const requested = useRef(false);
 
@@ -39,7 +43,10 @@ export default function ImproveWriting() {
     if (requested.current) return;
     requested.current = true;
     readSelection()
-      .then((text) => sendMessage(wrapSourceText(text)))
+      .then((text) => {
+        setSource(text);
+        return sendMessage(wrapSourceText(text));
+      })
       .catch(setSourceError);
   }, [sendMessage]);
 
@@ -59,6 +66,7 @@ export default function ImproveWriting() {
     "Improve Writing",
     MODEL_LABELS[model],
     refinements > 0 ? `Refined ×${refinements}` : undefined,
+    showDiff ? "Diff" : undefined,
   ]
     .filter(Boolean)
     .join(" · ");
@@ -69,7 +77,11 @@ export default function ImproveWriting() {
 
   const markdown = failure
     ? `## Something went wrong\n\n${describeError(failure)}\n\n\`${runtimeDiagnostics()}\``
-    : improved || "Reading your selection…";
+    : !improved
+      ? "Reading your selection…"
+      : showDiff
+        ? toDiffMarkdown(source, improved)
+        : improved;
 
   return (
     <Detail
@@ -128,6 +140,14 @@ export default function ImproveWriting() {
               shortcut={REFINE_SHORTCUT}
               target={<RefineForm onRefine={sendMessage} />}
             />
+            {improved.length > 0 && (
+              <Action
+                title={showDiff ? "Show Improved Text" : "Show Changes"}
+                icon={showDiff ? Icon.Text : Icon.Switch}
+                shortcut={DIFF_SHORTCUT}
+                onAction={() => setShowDiff((current) => !current)}
+              />
+            )}
             <Action title="Regenerate" icon={Icon.ArrowClockwise} shortcut={REGENERATE_SHORTCUT} onAction={reload} />
             {isLoading && <Action title="Stop" icon={Icon.Stop} shortcut={STOP_SHORTCUT} onAction={stop} />}
           </ActionPanel.Section>

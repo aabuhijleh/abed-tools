@@ -13,6 +13,7 @@ Select text anywhere, run the command, and Claude rewrites it. The result stream
 | `⌘⇧C`    | Copy as rich text                        |
 | `⌘⌥C`    | Copy as plain markdown                   |
 | `⌘I`     | Refine, e.g. "shorter", "more formal"    |
+| `⌘D`     | Toggle between the result and its diff   |
 | `⌘R`     | Regenerate                               |
 | `⌘.`     | Stop streaming                           |
 
