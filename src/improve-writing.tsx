@@ -61,11 +61,13 @@ export default function ImproveWriting() {
 
   const refinements = Math.max(messages.filter((message) => message.role === "user").length - 1, 0);
   const failure = sourceError ?? error;
+  const unchanged = !isLoading && improved.length > 0 && improved.trim() === source.trim();
 
   const navigationTitle = [
     "Improve Writing",
     MODEL_LABELS[model],
     refinements > 0 ? `Refined ×${refinements}` : undefined,
+    unchanged ? "No Changes" : undefined,
     showDiff ? "Diff" : undefined,
   ]
     .filter(Boolean)
@@ -80,7 +82,9 @@ export default function ImproveWriting() {
     : !improved
       ? "Reading your selection…"
       : showDiff
-        ? toDiffMarkdown(source, improved)
+        ? unchanged
+          ? `_No changes from your selection._\n\n${toDiffMarkdown(source, improved)}`
+          : toDiffMarkdown(source, improved)
         : improved;
 
   return (
