@@ -1,6 +1,6 @@
 # 🪛 Abed Tools
 
-Personal Raycast tools. Currently one command.
+Personal Raycast tools.
 
 ## ✍️ Improve Writing
 
@@ -18,6 +18,19 @@ Select text anywhere, run the command, and Claude rewrites it. The result stream
 | `⌘.`     | Stop streaming                           |
 
 The editing rules live in `src/commands/improve-writing/prompt.ts`. Every reply is bare text, so pasting inserts the rewrite and nothing else.
+
+## 🗂️ Dotfiles
+
+Browse the config files that shape this machine, grouped and in load order, with a preview of each one.
+
+The list comes from the `dotfiles` zsh function, through `dotfiles tsv`. Add a file to that function's registry and it shows up here. Opening a file runs `dotfiles edit`, so it uses your `$EDITOR` and creates folders for files that don't exist yet.
+
+| Shortcut | Action              |
+| -------- | ------------------- |
+| `↵`      | Open in your editor |
+| `⌘⇧C`    | Copy the path       |
+| `⌘D`     | Toggle the preview  |
+| `⌘R`     | Reload the list     |
 
 ## 🎨 Formatting
 

@@ -28,6 +28,21 @@
         "proofread",
         "unslop"
       ]
+    },
+    {
+      "name": "dotfiles",
+      "title": "Dotfiles",
+      "subtitle": "Abed Tools",
+      "description": "Browse, preview, and open the config files listed by the dotfiles shell command",
+      "mode": "view",
+      "keywords": [
+        "config",
+        "zsh",
+        "dotfiles",
+        "settings",
+        "tmux",
+        "ghostty"
+      ]
     }
   ],
   "preferences": [
