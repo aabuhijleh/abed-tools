@@ -2,6 +2,7 @@ import { Action, ActionPanel, Color, Icon, Keyboard, List, closeMainWindow, show
 import { usePromise } from "@raycast/utils";
 import { useState } from "react";
 import { describeError } from "./lib/errors";
+import { dotfileIcon } from "./commands/dotfiles/icons";
 import { Dotfile, loadDotfiles, openInEditor, previewMarkdown } from "./commands/dotfiles/registry";
 
 const PREVIEW_SHORTCUT: Keyboard.Shortcut = { modifiers: ["cmd"], key: "d" };
@@ -59,7 +60,7 @@ function DotfileItem({
     <List.Item
       title={file.name}
       subtitle={showPreview ? undefined : file.description}
-      icon={exists ? Icon.Document : { source: Icon.Plus, tintColor: Color.Orange }}
+      icon={{ value: dotfileIcon(file), tooltip: exists ? file.group : "Not created yet" }}
       keywords={[file.description, path, file.group]}
       accessories={
         showPreview
