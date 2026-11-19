@@ -86,7 +86,7 @@ To stop this from happening again, we should probably:
 
 <example>
 <input>
-Release plan for thursday — first we freeze main at noon, then QA runs the regression suite on staging, then if its green we tag v2.4.0 and deploy to prod. Ping me if you see anything weird in staging before then
+Release plan for thursday: first we freeze main at noon, then QA runs the regression suite on staging, then if its green we tag v2.4.0 and deploy to prod. Ping me if you see anything weird in staging before then
 </input>
 <output>
 Release plan for Thursday:
