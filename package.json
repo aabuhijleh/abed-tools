@@ -59,7 +59,7 @@
       "description": "Claude model used to rewrite the text.",
       "type": "dropdown",
       "required": false,
-      "default": "claude-haiku-5-5",
+      "default": "claude-sonnet-5-5",
       "data": [
         {
           "title": "Haiku 5.5",
