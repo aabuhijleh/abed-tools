@@ -22,6 +22,8 @@ const BY_NAME: Record<string, Image.Source> = {
   bun: Icon.Bolt,
   btop: Icon.Gauge,
   localstack: Icon.HardDrive,
+  robo: Icon.SpeechBubble,
+  "robo-md": Icon.TextDocument,
 };
 
 const GROUP_COLORS: Record<string, Color> = {
